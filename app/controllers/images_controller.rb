@@ -15,6 +15,12 @@ class ImagesController < ApplicationController
   end
 
   def destroy
+    @image = Image.find(params[:id])
+    @category = Category.find(@image.category.id)
+    @image.destroy
+    flash[:notice] = "Image Removed"
+
+    redirect_to category_path(@category.id)
   end
 
   def index
